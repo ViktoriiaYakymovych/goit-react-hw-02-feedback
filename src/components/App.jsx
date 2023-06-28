@@ -19,13 +19,16 @@ export class App  extends Component {
 
   onLeaveFeedback = (e) => {
     e.preventDefault();
-    console.log(e.target);
+
     const {good, neutral, bad} = this.state;
-    this.setState({
-      good: good + 1,
-      neutral: neutral + 1,
-      bad: bad + 1,
-    })
+    
+    if(e.target.textContent === 'Good') {
+      this.setState({good: good + 1});
+    } else if (e.target.textContent === 'Neutral') {
+      this.setState({neutral: neutral + 1});
+    } else if(e.target.textContent === 'Bad') {
+      this.setState({bad: bad + 1})
+    }
   }
 
   render() {
