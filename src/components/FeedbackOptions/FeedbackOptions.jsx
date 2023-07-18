@@ -1,41 +1,25 @@
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
 
-const Container = styled.div`
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
-`
-
-const Button = styled.button`
-  cursor: pointer;
-  display: block;
-  margin-bottom: 10px;
-  background-color: transparent;
-  border: 1px black solid;
-  padding: 5px;
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-`;
+import {
+  FeedbackOptionsContainer,
+  FeedbackOptionsButton,
+} from './FeedbackOptions.styled';
 
 export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
   return (
-    <Container>
+    <FeedbackOptionsContainer>
       {options.map(option => {
         return (
-          <Button
+          <FeedbackOptionsButton
             key={option}
             type="button"
             onClick={() => onLeaveFeedback(option)}
           >
             {option}
-          </Button>
+          </FeedbackOptionsButton>
         );
       })}
-    </Container>
+    </FeedbackOptionsContainer>
   );
 };
 

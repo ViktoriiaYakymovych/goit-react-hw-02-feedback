@@ -1,16 +1,13 @@
 import { Component } from 'react';
-import styled from '@emotion/styled';
-import { Statistics } from './Statistics/Statistics';
-import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
-import { Section } from './Section/Section';
-import Notification from './Notification/Notification';
 
-const Container = styled.div`
-  margin: 0 auto;
-  padding: 15px;
-  text-align: center;
-  border: black solid 1px;
-`;
+import { Statistics } from '../Statistics/Statistics';
+import { FeedbackOptions } from '../FeedbackOptions/FeedbackOptions';
+import { Section } from '../Section/Section';
+import Notification from '../Notification/Notification';
+
+import { AppContainer } from './App.styled';
+
+
 export class App extends Component {
   state = {
     good: 0,
@@ -27,13 +24,15 @@ export class App extends Component {
   };
 
   countPositiveFeedbackPercentage = () => {
-    return ((this.state.good / this.countTotalFeedback()) * 100).toFixed();
+    return (((this.state.good / this.countTotalFeedback()) * 100).toFixed() || 0);
   };
 
   render() {
+    const { good, neutral, bad } = this.state;
+
     return (
       <>
-        <Container>
+        <AppContainer>
           <Section title="Please leave feedback">
             <FeedbackOptions
               options={Object.keys(this.state)}
@@ -43,9 +42,9 @@ export class App extends Component {
           <Section title="Statistics">
             {this.countTotalFeedback() > 0 ? (
               <Statistics
-                good={this.state.good}
-                neutral={this.state.neutral}
-                bad={this.state.bad}
+                good={good}
+                neutral={neutral}
+                bad={bad}
                 total={this.countTotalFeedback()}
                 positivePercentage={this.countPositiveFeedbackPercentage()}
               ></Statistics>
@@ -53,7 +52,7 @@ export class App extends Component {
               <Notification message={'There is no feedback'} />
             )}
           </Section>
-        </Container>
+        </AppContainer>
       </>
     );
   }
